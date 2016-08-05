@@ -17,7 +17,7 @@ $(document).ready(function() {
 	curSet = curSeq = '';
 	
 	for(i = 0; i <= 2; i++) {
-		$('.list-group').append('<a href="#" class="list-group-item noplay' + '" id="nav' + i + '"></a>');
+		$('.list-group').append('<a href="#" class="list-group-item' + '" id="nav' + i + '"></a>');
 	}
 	
 	$('.list-group-item').click(function() {
@@ -32,16 +32,33 @@ $(document).ready(function() {
 				seqText += '<span id="seq' + i + '">' + curSeq[i] +'</span>';
 			}
 			$('#seq').html(seqText);
-			$('#a1 h3').text(partDict[parseInt(curSet.toString().charAt(0)) - 1]);
-			$('#a2 h3').text(partDict[parseInt(curSet.toString().charAt(1)) - 1]);
-			$('#a3 h3').text(partDict[parseInt(curSet.toString().charAt(2)) - 1]);
-			$('#a4 h3').text(partDict[parseInt(curSet.toString().charAt(3)) - 1]);
-		}		
+			$('#a1, #a2, #a3, #a4').css('background-image', 'none');
+			$('#a1 h3').text(partDict[parseInt(curSet.toString().charAt(0)) - 1]).css('color', 'black');
+			$('#a2 h3').text(partDict[parseInt(curSet.toString().charAt(1)) - 1]).css('color', 'black');
+			$('#a3 h3').text(partDict[parseInt(curSet.toString().charAt(2)) - 1]).css('color', 'black');
+			$('#a4 h3').text(partDict[parseInt(curSet.toString().charAt(3)) - 1]).css('color', 'black');
+			$('.glyphicon-remove').addClass('noevents').fadeTo(0, 0.25);
+			$('.glyphicon-play').removeClass('noevents').fadeTo(0, 1);
+			$('.list-group-item').removeClass('noevents');
+		}
 	});
 	
 	$('.glyphicon-play').click(function() {
-		playing = 1;
-		$('.list-group-item').removeClass('noplay');
+		if(playing == 0) {
+			playing = 1;
+			$(this).addClass('noevents').fadeTo(0, 0.25);
+			$('.glyphicon-remove').removeClass('noevents').fadeTo(0, 1);
+			$('.list-group-item').addClass('noevents');
+		}		
+	});
+	
+	$('.glyphicon-remove').click(function() {
+		if(playing == 1) {
+			playing = 0;
+			timer = 0;
+			seqPos = 0;
+			$('#nav' + curStep).trigger('click');
+		}
 	});
 	
 	$(['../img/Human.png']).preload();
@@ -65,12 +82,14 @@ $(document).ready(function() {
 					playing = 0;
 					timer = 0;
 					seqPos = 0;
-					$('.list-group-item').addClass('noplay');
-					temp = '#nav' + (++curStep).toString();
-					$(temp).trigger('click');
+					$('.list-group-item').removeClass('noevents');
+					if(curStep < 2)
+						curStep++;
+					$('#nav' + curStep).trigger('click');
 				} else {		
 					temp = '#a' + (curSeq[seqPos]).toString();
 					$(temp).css('background-image', 'url("../img/' + $(temp).attr('id') + '.png")');
+					$(temp).fadeOut(0).fadeIn('slow');
 					$('h3', temp).css('color', 'red');
 					$('#seq' + seqPos).css('color', 'red');
 					seqPos++;

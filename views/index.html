@@ -21,9 +21,9 @@
 			<!-- View -->
 			<div class="col-sm-8" id="view">
 				<h4 class="text-muted">Sequence:</h4>
-				<h1 id="seq"></h1>
+				<h1 id="seq">----</h1>
 				<hr>
-				<div id="human">
+				<div class="remove" id="human">
 					<img src="../img/Human.png" class="img-responsive">
 					<div class="bodyPart" id="a1">
 						<h3>Head</h3>
@@ -38,7 +38,10 @@
 						<h3>Toes</h3>
 					</div>
 				</div>
-				<h1><span class="glyphicon glyphicon-play"></span></h1>
+				<h1>
+					<span class="glyphicon glyphicon-play" data-toggle="tooltip" title="Begin the sequence"></span>
+					<span class="glyphicon glyphicon-remove" data-toggle="tooltip" title="Cancel the sequence"></span>
+				</h1>
 			</div>
 		</div>
 	</div>

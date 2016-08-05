@@ -13,6 +13,10 @@
 	src: url('../fonts/MonospaceBold.ttf');
 }
 
+.noevents {
+	pointer-events: none;
+}
+
 html, body {
 	font-family: 'Montserrat';
 	text-align: center;
@@ -43,17 +47,13 @@ html, body {
 	margin-bottom: 15px;
 }
 
-.list-group-item:not(.noplay) {
-	cursor: default;
-}
-
-.list-group-item.noplay:hover, .active {
+.list-group-item:hover, .active {
 	background-image: url("../img/ListItemActive.png");
 	background-repeat: no-repeat;
 	background-position: center;
 }
 
-.list-group-item.noplay:hover:not(.active) {
+.list-group-item:hover:not(.active) {
 	background-size: auto 120%;
 }
 
@@ -87,60 +87,65 @@ html, body {
 	height: 100%;
 }
 
-#human .bodyPart {
+.bodyPart {
 	position: absolute;
 	width: 313px;
 	background-size: 100% 100%;
 }
 
-#human .bodyPart h3 {
+.bodyPart h3 {
 	position: absolute;
 	text-align: left;
 	top: -15px;
 }
 
-#human #a1 {
+#a1 {
 	top: 0;
 	height: 55px;
 }
 
-#human #a1 h3 {
+#a1 h3 {
 	left: 195px;
 }
 
-#human #a2 {
+#a2 {
 	top: 58px;
 	height: 40px;
 }
 
-#human #a2 h3 {
+#a2 h3 {
 	left: 215px;
 }
 
-#human #a3 {
+#a3 {
 	top: 220px;
 	height: 40px;
 }
 
-#human #a3 h3 {
+#a3 h3 {
 	left: 200px;
 }
 
-#human #a4 {
+#a4 {
 	top: 273px;
 	height: 40px;
 }
 
-#human #a4 h3 {
+#a4 h3 {
 	left: 200px;
 }
 
-#view .glyphicon-play {
-	margin-top: 50px;
+.glyphicon {
+	position: relative;
+	top: 50px;
+	margin: auto;
 	color: black;
 }
 
-#view .glyphicon-play:hover {
+.glyphicon:hover {
 	color: gray;
 }
 
+.glyphicon-remove {
+	opacity: 0.25;
+}
