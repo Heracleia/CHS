@@ -8,13 +8,22 @@ $.fn.preload = function() {
 }
 
 $(document).ready(function() {
-	var audioElement = document.createElement('audio');
+	var headAudio, shoulderAudio, kneeAudio, toeAudio;
+	headAudio = document.createElement('audio');
+	shoulderAudio = document.createElement('audio');
+	kneeAudio = document.createElement('audio');
+	toeAudio = document.createElement('audio');
+	headAudio.setAttribute('src', '../sounds/head.wav');
+	shoulderAudio.setAttribute('src', '../sounds/shoulders.wav');
+	kneeAudio.setAttribute('src', '../sounds/knees.wav');
+	toeAudio.setAttribute('src', '../sounds/toes.wav');
+	var audios = [headAudio, shoulderAudio, kneeAudio, toeAudio];
 	var setDict = ['1234', '1324', '2413'];
 	var seqDict = ['12342', '432113', '1324323123'];
 	var partDict = ['Head', 'Shoulders', 'Knees', 'Toes'];
 	var playing, timer, seqPos, curStep, curSet, curSeq;
 	playing = timer = seqPos = curStep = 0;
-	curSet = curSeq = '';
+	curSet = curSeq = '';	
 	
 	for(i = 0; i <= 2; i++) {
 		$('.list-group').append('<a href="#" class="list-group-item' + '" id="nav' + i + '"></a>');
@@ -22,6 +31,7 @@ $(document).ready(function() {
 	
 	$('.list-group-item').click(function() {
 		if(playing == 0) {
+			$('#bgfocus').fadeOut();
 			$('.list-group-item').removeClass('active');
 			$(this).addClass('active');
 			curStep = $(this).attr('id').charAt(3);
@@ -46,6 +56,7 @@ $(document).ready(function() {
 	$('.glyphicon-play').click(function() {
 		if(playing == 0) {
 			playing = 1;
+			$('#bgfocus').fadeIn();
 			$(this).addClass('noevents').fadeTo(0, 0.25);
 			$('.glyphicon-remove').removeClass('noevents').fadeTo(0, 1);
 			$('.list-group-item').addClass('noevents');
@@ -92,6 +103,7 @@ $(document).ready(function() {
 					$(temp).fadeOut(0).fadeIn('slow');
 					$('h3', temp).css('color', 'red');
 					$('#seq' + seqPos).css('color', 'red');
+					audios[curSet.charAt(curSeq[seqPos] - 1) - 1].play();
 					seqPos++;
 				}
 			}
