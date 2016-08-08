@@ -1,12 +1,6 @@
 //Set refers to the placement of the body parts (eg 1243 means knees and toes are swapped)
 //Seq refers to the "real" order of the parts (eg 1334 means head, knees, knees, toes, regardless of the set)
 
-$.fn.preload = function() {
-	this.each(function() {
-		$('<img>')[0].src = this;
-	});
-}
-
 $(document).ready(function() {
 	var headAudio, shoulderAudio, kneeAudio, toeAudio;
 	headAudio = document.createElement('audio');
@@ -22,8 +16,15 @@ $(document).ready(function() {
 	var seqDict = ['12342', '432113', '1324323123'];
 	var partDict = ['Head', 'Shoulders', 'Knees', 'Toes'];
 	var playing, timer, seqPos, curStep, curSet, curSeq;
+	var maxTime = 3000; //Time (ms) between each command
 	playing = timer = seqPos = curStep = 0;
 	curSet = curSeq = '';	
+	
+	$.fn.preload = function() {
+		this.each(function() {
+			$('<img>')[0].src = this;
+		});
+	}
 	
 	for(i = 0; i <= 2; i++) {
 		$('.list-group').append('<a href="#" class="list-group-item' + '" id="nav' + i + '"></a>');
@@ -80,7 +81,7 @@ $(document).ready(function() {
 		if(playing == 1) {
 			timer += 100;
 			$('#view .glyphicon-arrow-up').css('left', '+=1');
-			if(timer >= 2000) {
+			if(timer >= maxTime) {
 				timer = 0;
 				var temp;
 				if(seqPos > 0) {
