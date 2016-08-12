@@ -2,6 +2,7 @@
 //Seq refers to the "real" order of the parts (eg 1334 means head, knees, knees, toes, regardless of the set)
 
 $(document).ready(function() {
+	//Main view
 	var headAudio, shoulderAudio, kneeAudio, toeAudio;
 	headAudio = document.createElement('audio');
 	shoulderAudio = document.createElement('audio');
@@ -12,7 +13,7 @@ $(document).ready(function() {
 	kneeAudio.setAttribute('src', '../sounds/knees.wav');
 	toeAudio.setAttribute('src', '../sounds/toes.wav');
 	var audios = [headAudio, shoulderAudio, kneeAudio, toeAudio];
-	var setDict = ['1234', '1324', '2413'];
+	var setDict = ['1234', '1324', '4312'];
 	var seqDict = ['12342', '432113', '1324323123'];
 	var partDict = ['Head', 'Shoulders', 'Knees', 'Toes'];
 	var playing, timer, seqPos, curStep, curSet, curSeq;
