@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Machine>DESKTOP-F0VDP7A</Machine>
+    <WindowsUser>Dylan</WindowsUser>
+    <TargetPlatformIdentifier>Windows</TargetPlatformIdentifier>
+    <TargetOsVersion>6.3</TargetOsVersion>
+    <TargetOsDescription>Windows 8.1</TargetOsDescription>
+    <SolutionConfiguration>Debug|x64</SolutionConfiguration>
+    <PackageArchitecture>x64</PackageArchitecture>
+    <PackageIdentityName>6f455301-01b6-4d13-afb9-238efb7a31a3</PackageIdentityName>
+    <IntermediateOutputPath>C:\Users\Dylan\Documents\Werk\CHS\vs\vs\obj\x64\Debug\</IntermediateOutputPath>
+    <RegisteredManifestChecksum>1A1A79942F8848C30BCD0846C771306B97D51184A667C3D13C0B06939C5F716D</RegisteredManifestChecksum>
+    <RegisteredPackageMoniker>6f455301-01b6-4d13-afb9-238efb7a31a3_1.0.0.0_x64__2ccv9674ecry0</RegisteredPackageMoniker>
+    <RegisteredUserModeAppID>6f455301-01b6-4d13-afb9-238efb7a31a3_2ccv9674ecry0!App</RegisteredUserModeAppID>
+    <RegisteredPackageID>6f455301-01b6-4d13-afb9-238efb7a31a3</RegisteredPackageID>
+    <RegisteredPackagePublisher>CN=Dylan</RegisteredPackagePublisher>
+    <RegisteredVersion>1.0.0.0</RegisteredVersion>
+    <JitOptimizationSuppressed>True</JitOptimizationSuppressed>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppXManifest Include="C:\Users\Dylan\Documents\Werk\CHS\vs\vs\bin\x64\Debug\AppxManifest.xml">
+      <PackagePath>AppxManifest.xml</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2016-08-17T18:42:46.700</Modified>
+    </AppXManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxPackagedFile Include="C:\Users\Dylan\Documents\Werk\CHS\vs\vs\bin\x64\Debug\vs.exe">
+      <PackagePath>vs.exe</PackagePath>
+      <Modified>2016-08-17T19:18:39.004</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Dylan\Documents\Werk\CHS\vs\packages\EngineIoClientDotNet.0.9.22\lib\netcore45\EngineIoClientDotNet.dll">
+      <PackagePath>EngineIoClientDotNet.dll</PackagePath>
+      <Modified>2016-08-17T18:41:09.165</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Dylan\Documents\Werk\CHS\vs\packages\Newtonsoft.Json.8.0.1\lib\portable-net45+wp80+win8+wpa81+dnxcore50\Newtonsoft.Json.dll">
+      <PackagePath>Newtonsoft.Json.dll</PackagePath>
+      <Modified>2016-08-17T18:41:07.556</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Dylan\Documents\Werk\CHS\vs\packages\SocketIoClientDotNet.0.9.13\lib\netcore45\SocketIoClientDotNet.dll">
+      <PackagePath>SocketIoClientDotNet.dll</PackagePath>
+      <Modified>2016-08-17T18:41:10.122</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Dylan\Documents\Werk\CHS\vs\vs\Assets\Logo.scale-100.png">
+      <PackagePath>Assets\Logo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2015-07-07T03:05:20.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Dylan\Documents\Werk\CHS\vs\vs\Assets\SmallLogo.scale-100.png">
+      <PackagePath>Assets\SmallLogo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2015-07-07T03:05:20.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Dylan\Documents\Werk\CHS\vs\vs\Assets\SplashScreen.scale-100.png">
+      <PackagePath>Assets\SplashScreen.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2015-07-07T03:05:20.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Dylan\Documents\Werk\CHS\vs\vs\Assets\StoreLogo.scale-100.png">
+      <PackagePath>Assets\StoreLogo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2015-07-07T03:05:20.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Dylan\Documents\Werk\CHS\vs\vs\bin\x64\Debug\vs.xr.xml">
+      <PackagePath>vs.xr.xml</PackagePath>
+      <Modified>2016-08-17T18:35:41.908</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Dylan\Documents\Werk\CHS\vs\vs\bin\x64\Debug\App.xbf">
+      <PackagePath>App.xbf</PackagePath>
+      <Modified>2016-08-17T18:27:18.378</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Dylan\Documents\Werk\CHS\vs\vs\bin\x64\Debug\MainPage.xbf">
+      <PackagePath>MainPage.xbf</PackagePath>
+      <Modified>2016-08-17T19:14:25.311</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Dylan\Documents\Werk\CHS\vs\vs\bin\x64\Debug\resources.pri">
+      <PackagePath>resources.pri</PackagePath>
+      <Modified>2016-08-17T18:42:46.653</Modified>
+    </AppxPackagedFile>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+</Project>

@@ -11,13 +11,14 @@ $(document).ready(function() {
 	headAudio.setAttribute('src', '../sounds/head.wav');
 	shoulderAudio.setAttribute('src', '../sounds/shoulders.wav');
 	kneeAudio.setAttribute('src', '../sounds/knees.wav');
-	toeAudio.setAttribute('src', '../sounds/toes.wav');
+	toeAudio.setAttribute('src', '../sounds/toes.wav');	
 	var audios = [headAudio, shoulderAudio, kneeAudio, toeAudio];
-	var setDict = ['1234', '1324', '4312'];
-	var seqDict = ['12342', '432113', '1324323123'];
+	var setDict = ['1234', '1324', '4231', '4321'];
+	var seqDict = ['123434', '3423132412', '1324323123', '4313122423'];
 	var partDict = ['Head', 'Shoulders', 'Knees', 'Toes'];
 	var playing, timer, seqPos, curStep, curSet, curSeq;
 	var maxTime = 3000; //Time (ms) between each command
+	var socket = io();
 	playing = timer = seqPos = curStep = 0;
 	curSet = curSeq = '';	
 	
@@ -27,7 +28,7 @@ $(document).ready(function() {
 		});
 	}
 	
-	for(i = 0; i <= 2; i++) {
+	for(i = 0; i <= setDict.length - 1; i++) {
 		$('.list-group').append('<a href="#" class="list-group-item' + '" id="nav' + i + '"></a>');
 	}
 	
@@ -57,6 +58,7 @@ $(document).ready(function() {
 	
 	$('.glyphicon-play').click(function() {
 		if(playing == 0) {
+			socket.emit('recordStart');
 			playing = 1;
 			$('#bgfocus').fadeIn();
 			$(this).addClass('noevents').fadeTo(0, 0.25);
@@ -67,6 +69,7 @@ $(document).ready(function() {
 	
 	$('.glyphicon-remove').click(function() {
 		if(playing == 1) {
+			socket.emit('recordCancel');
 			playing = 0;
 			timer = 0;
 			seqPos = 0;
@@ -92,11 +95,12 @@ $(document).ready(function() {
 					$('#seq' + (seqPos - 1)).css('color', 'black');
 				}
 				if(seqPos > curSeq.length - 1) {
+					socket.emit('recordComplete');
 					playing = 0;
 					timer = 0;
 					seqPos = 0;
 					$('.list-group-item').removeClass('noevents');
-					if(curStep < 2)
+					if(curStep < setDict.length - 1)
 						curStep++;
 					$('#nav' + curStep).trigger('click');
 				} else {		
