@@ -1,16 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <Machine>DESKTOP-F0VDP7A</Machine>
-    <WindowsUser>Dylan</WindowsUser>
+    <Machine>DESKTOP-4IETPJ3</Machine>
+    <WindowsUser>dylan</WindowsUser>
     <TargetPlatformIdentifier>Windows</TargetPlatformIdentifier>
     <TargetOsVersion>6.3</TargetOsVersion>
     <TargetOsDescription>Windows 8.1</TargetOsDescription>
     <SolutionConfiguration>Debug|x64</SolutionConfiguration>
     <PackageArchitecture>x64</PackageArchitecture>
     <PackageIdentityName>33ba04fc-07f2-4c70-b056-f6f14aeb9b79</PackageIdentityName>
-    <IntermediateOutputPath>C:\Users\Dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\Kinect2Sample\obj\x64\Debug\</IntermediateOutputPath>
-    <RegisteredManifestChecksum>9DF33B0E48FDCDF59D29A420D9EE728C71A83E0575F0FB10938C8C8A96992702</RegisteredManifestChecksum>
+    <PackageIdentityPublisher>CN=Jesse</PackageIdentityPublisher>
+    <IntermediateOutputPath>C:\Users\dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\Kinect2Sample\obj\x64\Debug\</IntermediateOutputPath>
+    <RemoteDeploymentType>
+    </RemoteDeploymentType>
+    <PackageRegistrationPath>
+    </PackageRegistrationPath>
+    <RemoveNonLayoutFiles>true</RemoveNonLayoutFiles>
+    <RegisteredManifestChecksum>864CF209C676796477F91C12BE1CA26C9332490B5DEDAE9230D8A726C1486C2B</RegisteredManifestChecksum>
     <RegisteredPackageMoniker>33ba04fc-07f2-4c70-b056-f6f14aeb9b79_1.0.0.0_x64__2ysye2qyxxc1e</RegisteredPackageMoniker>
     <RegisteredUserModeAppID>33ba04fc-07f2-4c70-b056-f6f14aeb9b79_2ysye2qyxxc1e!App</RegisteredUserModeAppID>
     <RegisteredPackageID>33ba04fc-07f2-4c70-b056-f6f14aeb9b79</RegisteredPackageID>
@@ -19,64 +25,64 @@
     <JitOptimizationSuppressed>True</JitOptimizationSuppressed>
   </PropertyGroup>
   <ItemGroup>
-    <AppXManifest Include="C:\Users\Dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\Kinect2Sample\bin\x64\Debug\AppxManifest.xml">
+    <AppXManifest Include="C:\Users\dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\Kinect2Sample\bin\x64\Debug\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2016-08-18T20:19:38.042</Modified>
+      <Modified>2016-08-20T19:44:23.360</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
-    <AppxPackagedFile Include="C:\Users\Dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\Kinect2Sample\bin\x64\Debug\Kinect2Sample.exe">
+    <AppxPackagedFile Include="C:\Users\dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\Kinect2Sample\bin\x64\Debug\Kinect2Sample.exe">
       <PackagePath>Kinect2Sample.exe</PackagePath>
-      <Modified>2016-08-18T20:23:11.056</Modified>
+      <Modified>2016-08-20T21:46:09.725</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\packages\EngineIoClientDotNet.0.9.22\lib\netcore45\EngineIoClientDotNet.dll">
+    <AppxPackagedFile Include="C:\Users\dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\packages\EngineIoClientDotNet.0.9.22\lib\netcore45\EngineIoClientDotNet.dll">
       <PackagePath>EngineIoClientDotNet.dll</PackagePath>
-      <Modified>2016-08-18T20:17:19.224</Modified>
+      <Modified>2016-08-20T02:28:00.946</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\packages\Newtonsoft.Json.8.0.1\lib\portable-net45+wp80+win8+wpa81+dnxcore50\Newtonsoft.Json.dll">
+    <AppxPackagedFile Include="C:\Users\dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\packages\Newtonsoft.Json.8.0.1\lib\portable-net45+wp80+win8+wpa81+dnxcore50\Newtonsoft.Json.dll">
       <PackagePath>Newtonsoft.Json.dll</PackagePath>
-      <Modified>2016-08-18T20:17:17.121</Modified>
+      <Modified>2016-08-20T02:28:01.525</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\packages\SocketIoClientDotNet.0.9.13\lib\netcore45\SocketIoClientDotNet.dll">
+    <AppxPackagedFile Include="C:\Users\dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\packages\SocketIoClientDotNet.0.9.13\lib\netcore45\SocketIoClientDotNet.dll">
       <PackagePath>SocketIoClientDotNet.dll</PackagePath>
-      <Modified>2016-08-18T20:17:20.381</Modified>
+      <Modified>2016-08-20T02:28:01.676</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\Kinect2Sample\Assets\Logo.scale-100.png">
+    <AppxPackagedFile Include="C:\Users\dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\Kinect2Sample\Assets\Logo.scale-100.png">
       <PackagePath>Assets\Logo.scale-100.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2015-03-27T16:19:45.000</Modified>
+      <Modified>2016-08-20T02:28:00.362</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\Kinect2Sample\Assets\SmallLogo.scale-100.png">
+    <AppxPackagedFile Include="C:\Users\dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\Kinect2Sample\Assets\SmallLogo.scale-100.png">
       <PackagePath>Assets\SmallLogo.scale-100.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2015-03-27T16:19:45.000</Modified>
+      <Modified>2016-08-20T02:28:00.362</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\Kinect2Sample\Assets\SplashScreen.scale-100.png">
+    <AppxPackagedFile Include="C:\Users\dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\Kinect2Sample\Assets\SplashScreen.scale-100.png">
       <PackagePath>Assets\SplashScreen.scale-100.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2015-03-27T16:19:45.000</Modified>
+      <Modified>2016-08-20T02:28:00.363</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\Kinect2Sample\Assets\StoreLogo.scale-100.png">
+    <AppxPackagedFile Include="C:\Users\dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\Kinect2Sample\Assets\StoreLogo.scale-100.png">
       <PackagePath>Assets\StoreLogo.scale-100.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2015-03-27T16:19:45.000</Modified>
+      <Modified>2016-08-20T02:28:00.364</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\Kinect2Sample\bin\x64\Debug\Kinect2Sample.xr.xml">
+    <AppxPackagedFile Include="C:\Users\dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\Kinect2Sample\bin\x64\Debug\Kinect2Sample.xr.xml">
       <PackagePath>Kinect2Sample.xr.xml</PackagePath>
-      <Modified>2016-08-18T20:19:37.766</Modified>
+      <Modified>2016-08-20T21:14:17.552</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\Kinect2Sample\bin\x64\Debug\App.xbf">
+    <AppxPackagedFile Include="C:\Users\dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\Kinect2Sample\bin\x64\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2016-08-18T20:16:37.375</Modified>
+      <Modified>2016-08-20T19:44:20.597</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\Kinect2Sample\bin\x64\Debug\MainPage.xbf">
+    <AppxPackagedFile Include="C:\Users\dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\Kinect2Sample\bin\x64\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
-      <Modified>2016-08-18T20:19:37.778</Modified>
+      <Modified>2016-08-20T21:15:24.635</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\Kinect2Sample\bin\x64\Debug\resources.pri">
+    <AppxPackagedFile Include="C:\Users\dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\Kinect2Sample\bin\x64\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2016-08-18T20:19:37.995</Modified>
+      <Modified>2016-08-20T19:44:22.687</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

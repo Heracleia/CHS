@@ -13,6 +13,28 @@
 	<script src="js/index.js"></script>
 </head>
 <body>
+	<!-- Status Bar -->
+	<div class="collapse" id="status-bar">
+		<p class="text-muted">Waiting for Kinect...</p>
+	</div>
+	<!-- Modal -->
+	<div class="modal fade" role="dialog" data-backdrop="static">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Enter Participant Name:</h4>
+				</div>
+				<div class="modal-body">
+					<form role="form" id="nameForm">
+						<div class="form-group">
+							<input type="text" class="form-control" id="name" placeholder="Name">
+						</div>
+						<button type="submit" class="btn btn-success">Submit</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="container">
 		<div class="row">
 			<!-- Navigation -->

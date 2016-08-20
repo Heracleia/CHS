@@ -35,6 +35,21 @@ html, body {
 	background: radial-gradient(circle, white, white, white, rgba(0,0,0,0.2));
 }
 
+#status-bar {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	background-color: rgba(255,255,0,0.2);
+}
+
+#status-bar p {
+	margin-top: 5px;
+}
+
+.modal {
+	margin: auto auto;
+}
+
 .row {
 	height: 100%;
 }
@@ -157,6 +172,6 @@ html, body {
 	color: gray;
 }
 
-.glyphicon-remove {
+.glyphicon-remove, .glyphicon-play {
 	opacity: 0.25;
 }

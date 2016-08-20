@@ -1,11 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Roots xmlns="clr-namespace:Microsoft.Xaml.Tools.XamlCompiler.RootLog;assembly=Microsoft.Windows.UI.Xaml.81.Build.Tasks">
-  <Roots.PropertyPathNames>
-    <RootPropertyPathName Name="CurrentFrameDescription" />
-    <RootPropertyPathName Name="Height" />
-    <RootPropertyPathName Name="Width" />
-    <RootPropertyPathName Name="StatusText" />
-  </Roots.PropertyPathNames>
   <Roots.RootTypes>
     <RootType FullName="Windows.UI.Xaml.Application" />
     <RootType FullName="Windows.UI.Xaml.Controls.Page">
@@ -20,11 +14,7 @@
     <RootType FullName="Windows.UI.Xaml.Media.SolidColorBrush">
       <RootProperty Name="Color" />
     </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.Button">
-      <RootProperty Name="Content" />
-      <RootProperty Name="Style" />
-      <RootEvent Name="Click" />
-    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.Button" />
     <RootType FullName="Windows.UI.Xaml.Controls.Control">
       <RootProperty Name="Background" />
       <RootProperty Name="BorderBrush" />
@@ -63,20 +53,6 @@
       <RootProperty Name="Style" />
       <RootProperty Name="Text" />
     </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.StackPanel">
-      <RootProperty Name="Orientation" />
-      <RootProperty Name="HorizontalAlignment" />
-      <RootProperty Name="VerticalAlignment" />
-      <RootProperty Name="Children" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.Image">
-      <RootProperty Name="Stretch" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.ScrollViewer">
-      <RootProperty Name="HorizontalScrollBarVisibility" />
-      <RootProperty Name="VerticalScrollBarVisibility" />
-      <RootProperty Name="Content" />
-    </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.TextBox">
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="Margin" />
@@ -84,7 +60,9 @@
       <RootProperty Name="Text" />
       <RootProperty Name="VerticalAlignment" />
     </RootType>
-    <RootType FullName="Windows.UI.Xaml.Data.Binding" />
+    <RootType FullName="Windows.UI.Xaml.Controls.Image">
+      <RootProperty Name="Stretch" />
+    </RootType>
     <RootType FullName="Kinect2Sample.MainPage" />
   </Roots.RootTypes>
 </Roots>

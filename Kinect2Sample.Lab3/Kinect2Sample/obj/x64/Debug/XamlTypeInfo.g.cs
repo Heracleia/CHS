@@ -124,21 +124,19 @@ namespace Kinect2Sample.Kinect2Sample_XamlTypeInfo
 
         private void InitTypeTables()
         {
-            _typeNameTable = new string[6];
+            _typeNameTable = new string[5];
             _typeNameTable[0] = "Kinect2Sample.MainPage";
             _typeNameTable[1] = "Windows.UI.Xaml.Controls.Page";
             _typeNameTable[2] = "Windows.UI.Xaml.Controls.UserControl";
-            _typeNameTable[3] = "String";
-            _typeNameTable[4] = "WindowsPreview.Kinect.FrameDescription";
-            _typeNameTable[5] = "Object";
+            _typeNameTable[3] = "WindowsPreview.Kinect.FrameDescription";
+            _typeNameTable[4] = "Object";
 
-            _typeTable = new global::System.Type[6];
+            _typeTable = new global::System.Type[5];
             _typeTable[0] = typeof(global::Kinect2Sample.MainPage);
             _typeTable[1] = typeof(global::Windows.UI.Xaml.Controls.Page);
             _typeTable[2] = typeof(global::Windows.UI.Xaml.Controls.UserControl);
-            _typeTable[3] = typeof(global::System.String);
-            _typeTable[4] = typeof(global::WindowsPreview.Kinect.FrameDescription);
-            _typeTable[5] = typeof(global::System.Object);
+            _typeTable[3] = typeof(global::WindowsPreview.Kinect.FrameDescription);
+            _typeTable[4] = typeof(global::System.Object);
         }
 
         private int LookupTypeIndexByName(string typeName)
@@ -188,7 +186,6 @@ namespace Kinect2Sample.Kinect2Sample_XamlTypeInfo
             case 0:   //  Kinect2Sample.MainPage
                 userType = new global::Kinect2Sample.Kinect2Sample_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
                 userType.Activator = Activate_0_MainPage;
-                userType.AddMemberName("StatusText");
                 userType.AddMemberName("CurrentFrameDescription");
                 userType.SetIsLocalType();
                 xamlType = userType;
@@ -202,17 +199,13 @@ namespace Kinect2Sample.Kinect2Sample_XamlTypeInfo
                 xamlType = new global::Kinect2Sample.Kinect2Sample_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 3:   //  String
-                xamlType = new global::Kinect2Sample.Kinect2Sample_XamlTypeInfo.XamlSystemBaseType(typeName, type);
-                break;
-
-            case 4:   //  WindowsPreview.Kinect.FrameDescription
+            case 3:   //  WindowsPreview.Kinect.FrameDescription
                 userType = new global::Kinect2Sample.Kinect2Sample_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
                 userType.SetIsReturnTypeStub();
                 xamlType = userType;
                 break;
 
-            case 5:   //  Object
+            case 4:   //  Object
                 xamlType = new global::Kinect2Sample.Kinect2Sample_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
             }
@@ -220,22 +213,12 @@ namespace Kinect2Sample.Kinect2Sample_XamlTypeInfo
         }
 
 
-        private object get_0_MainPage_StatusText(object instance)
-        {
-            var that = (global::Kinect2Sample.MainPage)instance;
-            return that.StatusText;
-        }
-        private void set_0_MainPage_StatusText(object instance, object Value)
-        {
-            var that = (global::Kinect2Sample.MainPage)instance;
-            that.StatusText = (global::System.String)Value;
-        }
-        private object get_1_MainPage_CurrentFrameDescription(object instance)
+        private object get_0_MainPage_CurrentFrameDescription(object instance)
         {
             var that = (global::Kinect2Sample.MainPage)instance;
             return that.CurrentFrameDescription;
         }
-        private void set_1_MainPage_CurrentFrameDescription(object instance, object Value)
+        private void set_0_MainPage_CurrentFrameDescription(object instance, object Value)
         {
             var that = (global::Kinect2Sample.MainPage)instance;
             that.CurrentFrameDescription = (global::WindowsPreview.Kinect.FrameDescription)Value;
@@ -248,17 +231,11 @@ namespace Kinect2Sample.Kinect2Sample_XamlTypeInfo
 
             switch (longMemberName)
             {
-            case "Kinect2Sample.MainPage.StatusText":
-                userType = (global::Kinect2Sample.Kinect2Sample_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Kinect2Sample.MainPage");
-                xamlMember = new global::Kinect2Sample.Kinect2Sample_XamlTypeInfo.XamlMember(this, "StatusText", "String");
-                xamlMember.Getter = get_0_MainPage_StatusText;
-                xamlMember.Setter = set_0_MainPage_StatusText;
-                break;
             case "Kinect2Sample.MainPage.CurrentFrameDescription":
                 userType = (global::Kinect2Sample.Kinect2Sample_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Kinect2Sample.MainPage");
                 xamlMember = new global::Kinect2Sample.Kinect2Sample_XamlTypeInfo.XamlMember(this, "CurrentFrameDescription", "WindowsPreview.Kinect.FrameDescription");
-                xamlMember.Getter = get_1_MainPage_CurrentFrameDescription;
-                xamlMember.Setter = set_1_MainPage_CurrentFrameDescription;
+                xamlMember.Getter = get_0_MainPage_CurrentFrameDescription;
+                xamlMember.Setter = set_0_MainPage_CurrentFrameDescription;
                 break;
             }
             return xamlMember;

@@ -74,7 +74,6 @@ namespace Kinect2Sample
         private const int BytesPerPixel = 4;
 
         private KinectSensor kinectSensor = null;
-        private string statusText = null;
         private WriteableBitmap bitmap = null;
         private FrameDescription currentFrameDescription;
         private DisplayFrameType currentDisplayFrameType;
@@ -85,23 +84,11 @@ namespace Kinect2Sample
         private byte[] infraredPixels = null;
 
         private bool recording = false;
+        private string currentStep = "0";
+        private string participantName = "unnamed";
+        private StorageFolder currentDirectory = null;
 
         public event PropertyChangedEventHandler PropertyChanged;
-        public string StatusText
-        {
-            get { return this.statusText; }
-            set
-            {
-                if (this.statusText != value)
-                {
-                    this.statusText = value;
-                    if (this.PropertyChanged != null)
-                    {
-                        this.PropertyChanged(this, new PropertyChangedEventArgs("StatusText"));
-                    }
-                }
-            }
-        }
 
         public FrameDescription CurrentFrameDescription
         {
@@ -130,16 +117,13 @@ namespace Kinect2Sample
 
             this.multiSourceFrameReader.MultiSourceFrameArrived += this.Reader_MultiSourceFrameArrived;
 
-            // set IsAvailableChanged event notifier
-            this.kinectSensor.IsAvailableChanged += this.Sensor_IsAvailableChanged;
-
             // use the window object as the view model in this simple example
             this.DataContext = this;
 
             // open the sensor
             this.kinectSensor.Open();
 
-            var socket = IO.Socket("http://localhost:3000");
+            var socket = IO.Socket("http://localhost:3000/kinect");
             socket.On(Socket.EVENT_CONNECT, async () =>
             {
                 await Windows.ApplicationModel.Core.CoreApplication.MainView.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () => {
@@ -147,10 +131,10 @@ namespace Kinect2Sample
                 });
             });
 
-            socket.On("recordStart", async () =>
+            socket.On("recordStart", async (data) =>
             {
                 await Windows.ApplicationModel.Core.CoreApplication.MainView.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () => {
-                    record();
+                    record(data.ToString());
                 });
             });
 
@@ -166,6 +150,11 @@ namespace Kinect2Sample
                 await Windows.ApplicationModel.Core.CoreApplication.MainView.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () => {
                     complete();
                 });
+            });
+
+            socket.On("participantName", (data) =>
+            {
+                participantName = data.ToString();
             });
 
             this.InitializeComponent();
@@ -195,11 +184,6 @@ namespace Kinect2Sample
                 default:
                     break;
             }
-        }
-
-        private void Sensor_IsAvailableChanged(KinectSensor sender, IsAvailableChangedEventArgs args)
-        {
-            this.StatusText = this.kinectSensor.IsAvailable ? "Running" : "Not Available";
         }
 
         private void Reader_MultiSourceFrameArrived(MultiSourceFrameReader sender, MultiSourceFrameArrivedEventArgs e)
@@ -259,7 +243,7 @@ namespace Kinect2Sample
             {
                 this.bitmap.Invalidate();
                 FrameDisplayImage.Source = this.bitmap;
-                if (recording) SaveToFile(this.bitmap, string.Format("{0:hh-mm-ss-tt}-color.jpg", DateTime.Now));
+                if (recording) SaveToFile(this.bitmap, string.Format("{0:hh-mm-ss.fff}-color.jpg", DateTime.Now));
             }
         }
 
@@ -329,8 +313,9 @@ namespace Kinect2Sample
             FrameDisplayImage.Source = this.bitmap;
         }
 
-        void record()
+        void record(string step)
         {
+            createDir(string.Format("{0:dd.MM}-step" + step + '-' + participantName, DateTime.Now));
             textBox.Text = "Recording...";
             recording = true;
         }
@@ -347,31 +332,34 @@ namespace Kinect2Sample
             recording = false;
         }
 
+        async void createDir(string dirname)
+        {
+            currentDirectory = await ApplicationData.Current.LocalFolder.CreateFolderAsync(dirname, CreationCollisionOption.GenerateUniqueName);
+        }
+
         async void SaveToFile(WriteableBitmap bmp, string filename)
         {
-            var file = await ApplicationData.Current.TemporaryFolder.CreateFileAsync(filename, CreationCollisionOption.GenerateUniqueName);
+            StorageFile file = null;
+            try
+            {
+                file = await currentDirectory.CreateFileAsync(filename, CreationCollisionOption.GenerateUniqueName);
+            } catch(Exception e)
+            {
+                return;
+            }
+
             using (IRandomAccessStream stream = await file.OpenAsync(FileAccessMode.ReadWrite))
             {
-                Windows.Graphics.Imaging.BitmapEncoder encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.JpegEncoderId, stream);
+                BitmapEncoder encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.JpegEncoderId, stream);
                 Stream pixelStream = bmp.PixelBuffer.AsStream();
                 byte[] pixels = new byte[pixelStream.Length];
                 await pixelStream.ReadAsync(pixels, 0, pixels.Length);
 
+                string test = file.Path;
+
                 encoder.SetPixelData(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Ignore, (uint)bmp.PixelWidth, (uint)bmp.PixelHeight, 96.0, 96.0, pixels);
                 await encoder.FlushAsync();
             }
-
         }
-
-        private void InfraredButton_Click(object sender, RoutedEventArgs e)
-        {
-            SetupCurrentDisplay(DisplayFrameType.Infrared);
-        }
-
-        private void ColorButton_Click(object sender, RoutedEventArgs e)
-        {
-            SetupCurrentDisplay(DisplayFrameType.Color);
-        }
-
     }
 }

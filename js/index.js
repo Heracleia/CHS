@@ -18,7 +18,10 @@ $(document).ready(function() {
 	var partDict = ['Head', 'Shoulders', 'Knees', 'Toes'];
 	var playing, timer, seqPos, curStep, curSet, curSeq;
 	var maxTime = 3000; //Time (ms) between each command
-	var socket = io();
+	var socket = io('/site');
+	var nameCollected = false;
+	var kinectConnected = false;
+	var participantName = 'Name';
 	playing = timer = seqPos = curStep = 0;
 	curSet = curSeq = '';	
 	
@@ -31,6 +34,18 @@ $(document).ready(function() {
 	for(i = 0; i <= setDict.length - 1; i++) {
 		$('.list-group').append('<a href="#" class="list-group-item' + '" id="nav' + i + '"></a>');
 	}
+	
+	$('.collapse').collapse('show');
+	$('.modal').modal('show');
+	
+	$('#nameForm').submit(function(e) {
+		e.preventDefault();
+		$('.modal').modal('hide');
+		participantName = $('#name').val();
+		nameCollected = true;
+		if(kinectConnected)
+			socket.emit('participantName', participantName);
+	});
 	
 	$('.list-group-item').click(function() {
 		if(playing == 0) {
@@ -51,14 +66,17 @@ $(document).ready(function() {
 			$('#a3 h3').text(partDict[parseInt(curSet.toString().charAt(2)) - 1]).css('color', 'black');
 			$('#a4 h3').text(partDict[parseInt(curSet.toString().charAt(3)) - 1]).css('color', 'black');
 			$('.glyphicon-remove').addClass('noevents').fadeTo(0, 0.25);
-			$('.glyphicon-play').removeClass('noevents').fadeTo(0, 1);
+			if(kinectConnected)
+				$('.glyphicon-play').removeClass('noevents').fadeTo(0, 1);
+			else
+				$('.glyphicon-play').addClass('noevents').fadeTo(0, 0.25);
 			$('.list-group-item').removeClass('noevents');
 		}
 	});
 	
 	$('.glyphicon-play').click(function() {
 		if(playing == 0) {
-			socket.emit('recordStart');
+			socket.emit('recordStart', curStep + 1);
 			playing = 1;
 			$('#bgfocus').fadeIn();
 			$(this).addClass('noevents').fadeTo(0, 0.25);
@@ -70,11 +88,25 @@ $(document).ready(function() {
 	$('.glyphicon-remove').click(function() {
 		if(playing == 1) {
 			socket.emit('recordCancel');
-			playing = 0;
-			timer = 0;
-			seqPos = 0;
-			$('#nav' + curStep).trigger('click');
+			stopRecording();
 		}
+	});
+	
+	socket.on('kinectConnected', function() {
+		kinectConnected = true;
+		$('.glyphicon-play').removeClass('noevents').fadeTo(0, 1);
+		$('#status-bar').html('<p class="text-muted">Kinect connected</p>').css('background-color', 'rgba(0,255,0,0.2)').collapse('show');
+		if(nameCollected)
+			socket.emit('participantName', participantName);
+		setTimeout(function() {
+			$('#status-bar').collapse('hide');
+		}, 2000);
+	});
+	
+	socket.on('kinectDisconnected', function() {
+		kinectConnected = false;
+		$('.glyphicon-play').addClass('noevents').fadeTo(0, 0.25);
+		$('#status-bar').html('<p class="text-muted">Kinect disconnected - please reconnect and restart the most recent step</p>').css('background-color', 'rgba(255,0,0,0.2)').collapse('show');
 	});
 	
 	$(['../img/Human.png']).preload();
@@ -83,36 +115,45 @@ $(document).ready(function() {
 	
 	setInterval(function() {
 		if(playing == 1) {
-			timer += 100;
-			$('#view .glyphicon-arrow-up').css('left', '+=1');
-			if(timer >= maxTime) {
-				timer = 0;
-				var temp;
-				if(seqPos > 0) {
-					temp = '#a' + (curSeq[seqPos - 1]).toString();
-					$(temp).css('background-image', 'none');
-					$('h3', temp).css('color', 'black');
-					$('#seq' + (seqPos - 1)).css('color', 'black');
-				}
-				if(seqPos > curSeq.length - 1) {
-					socket.emit('recordComplete');
-					playing = 0;
+			if(kinectConnected) {
+				timer += 100;
+				$('#view .glyphicon-arrow-up').css('left', '+=1');
+				if(timer >= maxTime) {
 					timer = 0;
-					seqPos = 0;
-					$('.list-group-item').removeClass('noevents');
-					if(curStep < setDict.length - 1)
-						curStep++;
-					$('#nav' + curStep).trigger('click');
-				} else {		
-					temp = '#a' + (curSeq[seqPos]).toString();
-					$(temp).css('background-image', 'url("../img/' + $(temp).attr('id') + '.png")');
-					$(temp).fadeOut(0).fadeIn('slow');
-					$('h3', temp).css('color', 'red');
-					$('#seq' + seqPos).css('color', 'red');
-					audios[curSet.charAt(curSeq[seqPos] - 1) - 1].play();
-					seqPos++;
+					var temp;
+					if(seqPos > 0) {
+						temp = '#a' + (curSeq[seqPos - 1]).toString();
+						$(temp).css('background-image', 'none');
+						$('h3', temp).css('color', 'black');
+						$('#seq' + (seqPos - 1)).css('color', 'black');
+					}
+					if(seqPos > curSeq.length - 1) {
+						socket.emit('recordComplete');
+						if(curStep < setDict.length - 1)
+							curStep++;
+						stopRecording();
+					} else {		
+						temp = '#a' + (curSeq[seqPos]).toString();
+						$(temp).css('background-image', 'url("../img/' + $(temp).attr('id') + '.png")');
+						$(temp).fadeOut(0).fadeIn('slow');
+						$('h3', temp).css('color', 'red');
+						$('#seq' + seqPos).css('color', 'red');
+						audios[curSet.charAt(curSeq[seqPos] - 1) - 1].play();
+						seqPos++;
+					}
 				}
+			}
+			else {
+				stopRecording();
 			}
 		}
 	}, 100);
+	
+	function stopRecording() {
+		playing = 0;
+		timer = 0;
+		seqPos = 0;
+		$('.list-group-item').removeClass('noevents');
+		$('#nav' + curStep).trigger('click');
+	}
 });
