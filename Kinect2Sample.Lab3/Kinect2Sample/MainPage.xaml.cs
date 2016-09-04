@@ -315,7 +315,7 @@ namespace Kinect2Sample
 
         void record(string step)
         {
-            createDir(string.Format("{0:dd.MM}-step" + step + '-' + participantName, DateTime.Now));
+            createDir(string.Format("{0:dd.hh.mm}-step" + step + '-' + participantName, DateTime.Now));
             textBox.Text = "Recording...";
             recording = true;
         }

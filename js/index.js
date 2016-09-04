@@ -76,7 +76,7 @@ $(document).ready(function() {
 	
 	$('.glyphicon-play').click(function() {
 		if(playing == 0) {
-			socket.emit('recordStart', curStep + 1);
+			socket.emit('recordStart', parseInt(curStep) + 1);
 			playing = 1;
 			$('#bgfocus').fadeIn();
 			$(this).addClass('noevents').fadeTo(0, 0.25);
@@ -139,6 +139,8 @@ $(document).ready(function() {
 						$('h3', temp).css('color', 'red');
 						$('#seq' + seqPos).css('color', 'red');
 						audios[curSet.charAt(curSeq[seqPos] - 1) - 1].play();
+						var now = new Date();
+						socket.emit('writeTime', (seqPos + 1) + ',' + now.getHours().toString() + '.' + now.getSeconds().toString() + '.' + now.getMilliseconds().toString());
 						seqPos++;
 					}
 				}
@@ -156,4 +158,26 @@ $(document).ready(function() {
 		$('.list-group-item').removeClass('noevents');
 		$('#nav' + curStep).trigger('click');
 	}
+	
+	function toAnalysis() {
+		$('#status-bar').fadeOut();
+		$('#recording').fadeOut(function() {
+			$('#analysis').fadeIn();
+		});
+	}
+	
+	function toRecording() {
+		$('#status-bar').fadeIn();
+		$('#analysis').fadeOut(function() {
+			$('#recording').fadeIn();
+		});
+	}
+	
+	$('#analysisBtn').click(function() {
+		toAnalysis();
+	});
+	
+	$('#recordingBtn').click(function() {
+		toRecording();
+	});
 });

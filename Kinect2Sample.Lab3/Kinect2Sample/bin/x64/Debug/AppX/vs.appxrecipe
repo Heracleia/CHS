@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <Machine>DESKTOP-4IETPJ3</Machine>
+    <Machine>DESKTOP-MSFBTJU</Machine>
     <WindowsUser>dylan</WindowsUser>
     <TargetPlatformIdentifier>Windows</TargetPlatformIdentifier>
     <TargetOsVersion>6.3</TargetOsVersion>
@@ -10,7 +10,7 @@
     <PackageArchitecture>x64</PackageArchitecture>
     <PackageIdentityName>33ba04fc-07f2-4c70-b056-f6f14aeb9b79</PackageIdentityName>
     <PackageIdentityPublisher>CN=Jesse</PackageIdentityPublisher>
-    <IntermediateOutputPath>C:\Users\dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\Kinect2Sample\obj\x64\Debug\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Users\dylan\Documents\CHS\Kinect2Sample.Lab3\Kinect2Sample\obj\x64\Debug\</IntermediateOutputPath>
     <RemoteDeploymentType>
     </RemoteDeploymentType>
     <PackageRegistrationPath>
@@ -25,64 +25,64 @@
     <JitOptimizationSuppressed>True</JitOptimizationSuppressed>
   </PropertyGroup>
   <ItemGroup>
-    <AppXManifest Include="C:\Users\dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\Kinect2Sample\bin\x64\Debug\AppxManifest.xml">
+    <AppXManifest Include="C:\Users\dylan\Documents\CHS\Kinect2Sample.Lab3\Kinect2Sample\bin\x64\Debug\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2016-08-20T19:44:23.360</Modified>
+      <Modified>2016-09-04T18:21:29.586</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
-    <AppxPackagedFile Include="C:\Users\dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\Kinect2Sample\bin\x64\Debug\Kinect2Sample.exe">
+    <AppxPackagedFile Include="C:\Users\dylan\Documents\CHS\Kinect2Sample.Lab3\Kinect2Sample\bin\x64\Debug\Kinect2Sample.exe">
       <PackagePath>Kinect2Sample.exe</PackagePath>
-      <Modified>2016-08-20T21:46:09.725</Modified>
+      <Modified>2016-09-04T18:31:45.733</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\packages\EngineIoClientDotNet.0.9.22\lib\netcore45\EngineIoClientDotNet.dll">
+    <AppxPackagedFile Include="C:\Users\dylan\Documents\CHS\Kinect2Sample.Lab3\packages\EngineIoClientDotNet.0.9.22\lib\netcore45\EngineIoClientDotNet.dll">
       <PackagePath>EngineIoClientDotNet.dll</PackagePath>
-      <Modified>2016-08-20T02:28:00.946</Modified>
+      <Modified>2016-09-04T17:30:17.058</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\packages\Newtonsoft.Json.8.0.1\lib\portable-net45+wp80+win8+wpa81+dnxcore50\Newtonsoft.Json.dll">
+    <AppxPackagedFile Include="C:\Users\dylan\Documents\CHS\Kinect2Sample.Lab3\packages\Newtonsoft.Json.8.0.1\lib\portable-net45+wp80+win8+wpa81+dnxcore50\Newtonsoft.Json.dll">
       <PackagePath>Newtonsoft.Json.dll</PackagePath>
-      <Modified>2016-08-20T02:28:01.525</Modified>
+      <Modified>2016-09-04T17:30:17.343</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\packages\SocketIoClientDotNet.0.9.13\lib\netcore45\SocketIoClientDotNet.dll">
+    <AppxPackagedFile Include="C:\Users\dylan\Documents\CHS\Kinect2Sample.Lab3\packages\SocketIoClientDotNet.0.9.13\lib\netcore45\SocketIoClientDotNet.dll">
       <PackagePath>SocketIoClientDotNet.dll</PackagePath>
-      <Modified>2016-08-20T02:28:01.676</Modified>
+      <Modified>2016-09-04T17:30:17.445</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\Kinect2Sample\Assets\Logo.scale-100.png">
+    <AppxPackagedFile Include="C:\Users\dylan\Documents\CHS\Kinect2Sample.Lab3\Kinect2Sample\Assets\Logo.scale-100.png">
       <PackagePath>Assets\Logo.scale-100.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2016-08-20T02:28:00.362</Modified>
+      <Modified>2016-09-04T17:30:16.680</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\Kinect2Sample\Assets\SmallLogo.scale-100.png">
+    <AppxPackagedFile Include="C:\Users\dylan\Documents\CHS\Kinect2Sample.Lab3\Kinect2Sample\Assets\SmallLogo.scale-100.png">
       <PackagePath>Assets\SmallLogo.scale-100.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2016-08-20T02:28:00.362</Modified>
+      <Modified>2016-09-04T17:30:16.680</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\Kinect2Sample\Assets\SplashScreen.scale-100.png">
+    <AppxPackagedFile Include="C:\Users\dylan\Documents\CHS\Kinect2Sample.Lab3\Kinect2Sample\Assets\SplashScreen.scale-100.png">
       <PackagePath>Assets\SplashScreen.scale-100.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2016-08-20T02:28:00.363</Modified>
+      <Modified>2016-09-04T17:30:16.681</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\Kinect2Sample\Assets\StoreLogo.scale-100.png">
+    <AppxPackagedFile Include="C:\Users\dylan\Documents\CHS\Kinect2Sample.Lab3\Kinect2Sample\Assets\StoreLogo.scale-100.png">
       <PackagePath>Assets\StoreLogo.scale-100.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2016-08-20T02:28:00.364</Modified>
+      <Modified>2016-09-04T17:30:16.682</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\Kinect2Sample\bin\x64\Debug\Kinect2Sample.xr.xml">
+    <AppxPackagedFile Include="C:\Users\dylan\Documents\CHS\Kinect2Sample.Lab3\Kinect2Sample\bin\x64\Debug\Kinect2Sample.xr.xml">
       <PackagePath>Kinect2Sample.xr.xml</PackagePath>
-      <Modified>2016-08-20T21:14:17.552</Modified>
+      <Modified>2016-09-04T17:30:16.915</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\Kinect2Sample\bin\x64\Debug\App.xbf">
+    <AppxPackagedFile Include="C:\Users\dylan\Documents\CHS\Kinect2Sample.Lab3\Kinect2Sample\bin\x64\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2016-08-20T19:44:20.597</Modified>
+      <Modified>2016-09-04T18:21:28.835</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\Kinect2Sample\bin\x64\Debug\MainPage.xbf">
+    <AppxPackagedFile Include="C:\Users\dylan\Documents\CHS\Kinect2Sample.Lab3\Kinect2Sample\bin\x64\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
-      <Modified>2016-08-20T21:15:24.635</Modified>
+      <Modified>2016-09-04T18:21:28.837</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\Kinect2Sample\bin\x64\Debug\resources.pri">
+    <AppxPackagedFile Include="C:\Users\dylan\Documents\CHS\Kinect2Sample.Lab3\Kinect2Sample\bin\x64\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2016-08-20T19:44:22.687</Modified>
+      <Modified>2016-09-04T18:21:29.430</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

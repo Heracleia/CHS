@@ -59,8 +59,13 @@ html, body {
 	padding-top: 7%;
 }
 
-.list-group {
+.left-col {
 	border-right: 1px solid gray;
+	height: 100%;
+}
+
+.right-col {
+	border-left: 1px solid gray;
 	height: 100%;
 }
 
