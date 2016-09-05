@@ -22,6 +22,7 @@ $(document).ready(function() {
 	var nameCollected = false;
 	var kinectConnected = false;
 	var participantName = 'Name';
+	var ctx = document.getElementById('playback').getContext('2d');
 	playing = timer = seqPos = curStep = 0;
 	curSet = curSeq = '';	
 	
@@ -172,6 +173,20 @@ $(document).ready(function() {
 			$('#recording').fadeIn();
 		});
 	}
+	
+	var imageObj = new Image();
+	imageObj.onload = function() {
+		ctx.save();
+		ctx.clearRect(0, 0, 320, 180);
+		ctx.drawImage(this, 0, 0);
+		ctx.restore();
+	};
+	
+	var fc = 0;
+	setInterval(function() {
+		imageObj.src = '../img/a' + (fc % 4 + 1)  + '.png';
+		fc++;
+	}, 30);
 	
 	$('#analysisBtn').click(function() {
 		toAnalysis();
