@@ -1,1 +1,1 @@
-C:\Users\dylan\Documents\CHS\Kinect2Sample.Lab3\Kinect2Sample\Kinect2Sample.csproj;x64
+C:\Users\dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\Kinect2Sample\Kinect2Sample.csproj;x64

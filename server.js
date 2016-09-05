@@ -63,6 +63,31 @@ nssite.on('connection', function(socket) {
 		nskinect.emit('participantName', data);
 		name = data.toString();
 	});
+	
+	socket.on('reqVideo', function(data) {
+		var path = 'C:/Users/dylan/AppData/Local/Packages/33ba04fc-07f2-4c70-b056-f6f14aeb9b79_2ysye2qyxxc1e/LocalState/23.08-step01-Dylan/';
+		fs.readdir(path, function(err, files) {
+			if(err)
+				console.log(err);
+			else {
+				var i = 0;
+				var buffers = [];
+				setInterval(function() {
+					if(i < files.length) {
+						fs.readFile(path + files[i], function(err, buf) {
+							if(err)
+								console.log(err);
+							else {
+								socket.emit('image', {buffer: buf.toString('base64'), index: i, max: files.length});
+								console.log(i);
+							}
+						});
+						i++;
+					}
+				}, 100);				
+			}
+		});
+	});
 });
 
 nskinect.on('connection', function(socket) {

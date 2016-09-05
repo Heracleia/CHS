@@ -16,14 +16,16 @@ $(document).ready(function() {
 	var setDict = ['1234', '1324', '4231', '4321'];
 	var seqDict = ['123434', '3423132412', '1324323123', '4313122423'];
 	var partDict = ['Head', 'Shoulders', 'Knees', 'Toes'];
-	var playing, timer, seqPos, curStep, curSet, curSeq;
+	var playing, loading, recording, timer, seqPos, curStep, curSet, curSeq;
 	var maxTime = 3000; //Time (ms) between each command
 	var socket = io('/site');
 	var nameCollected = false;
 	var kinectConnected = false;
 	var participantName = 'Name';
-	var ctx = document.getElementById('playback').getContext('2d');
-	playing = timer = seqPos = curStep = 0;
+	var canvas = document.getElementById('playback');
+	var ctx = canvas.getContext('2d');
+	var buffers = [];
+	playing = loading = recording = timer = seqPos = curStep = 0;
 	curSet = curSeq = '';	
 	
 	$.fn.preload = function() {
@@ -49,7 +51,7 @@ $(document).ready(function() {
 	});
 	
 	$('.list-group-item').click(function() {
-		if(playing == 0) {
+		if(recording == 0) {
 			$('#bgfocus').fadeOut();
 			$('.list-group-item').removeClass('active');
 			$(this).addClass('active');
@@ -76,9 +78,9 @@ $(document).ready(function() {
 	});
 	
 	$('.glyphicon-play').click(function() {
-		if(playing == 0) {
+		if(recording == 0) {
 			socket.emit('recordStart', parseInt(curStep) + 1);
-			playing = 1;
+			recording = 1;
 			$('#bgfocus').fadeIn();
 			$(this).addClass('noevents').fadeTo(0, 0.25);
 			$('.glyphicon-remove').removeClass('noevents').fadeTo(0, 1);
@@ -87,7 +89,7 @@ $(document).ready(function() {
 	});
 	
 	$('.glyphicon-remove').click(function() {
-		if(playing == 1) {
+		if(recording == 1) {
 			socket.emit('recordCancel');
 			stopRecording();
 		}
@@ -115,7 +117,7 @@ $(document).ready(function() {
 	$('#nav0').trigger('click');
 	
 	setInterval(function() {
-		if(playing == 1) {
+		if(recording == 1) {
 			if(kinectConnected) {
 				timer += 100;
 				$('#view .glyphicon-arrow-up').css('left', '+=1');
@@ -153,7 +155,7 @@ $(document).ready(function() {
 	}, 100);
 	
 	function stopRecording() {
-		playing = 0;
+		recording = 0;
 		timer = 0;
 		seqPos = 0;
 		$('.list-group-item').removeClass('noevents');
@@ -177,19 +179,43 @@ $(document).ready(function() {
 	var imageObj = new Image();
 	imageObj.onload = function() {
 		ctx.save();
-		ctx.clearRect(0, 0, 320, 180);
-		ctx.drawImage(this, 0, 0);
+		ctx.clearRect(0, 0, 640, 360);
+		ctx.drawImage(this, 0, 0, 1920, 1080, 0, 0, 640, 360);
 		ctx.restore();
 	};
 	
-	var fc = 0;
+	var i = 0;
 	setInterval(function() {
-		imageObj.src = '../img/a' + (fc % 4 + 1)  + '.png';
-		fc++;
+		if(playing && i < buffers.length) {
+			imageObj.src = 'data:image/jpeg;base64,' + buffers[i];
+			i++;
+		} else if(playing) {
+			playing = 0;
+			i = 0;
+			loading = 0;
+			ctx.clearRect(0, 0, 640, 360);
+		}
 	}, 30);
+	
+	socket.on('image', function(data) {
+		buffers.push(data.buffer);
+		var prog = 100 * data.index / data.max;
+		$('.progress-bar').css('width', prog + '%').attr('aria-valuenow', prog).text(parseInt(prog) + '%');
+		if(data.index + 1 == data.max) {
+			$('.progress-bar').fadeOut();
+			playing = 1;
+		}
+	});
 	
 	$('#analysisBtn').click(function() {
 		toAnalysis();
+		if(loading == 0) {
+			socket.emit('reqVideo');
+			ctx.textAlign = 'center';
+			ctx.font = '16px sans-serif';
+			ctx.fillText('Loading...', canvas.width / 2, canvas.height / 2);
+			loading = 1;
+		}		
 	});
 	
 	$('#recordingBtn').click(function() {
