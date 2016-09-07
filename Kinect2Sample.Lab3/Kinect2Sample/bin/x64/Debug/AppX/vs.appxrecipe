@@ -34,7 +34,7 @@
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\Kinect2Sample\bin\x64\Debug\Kinect2Sample.exe">
       <PackagePath>Kinect2Sample.exe</PackagePath>
-      <Modified>2016-09-05T22:15:42.363</Modified>
+      <Modified>2016-09-07T20:10:53.106</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\packages\EngineIoClientDotNet.0.9.22\lib\netcore45\EngineIoClientDotNet.dll">
       <PackagePath>EngineIoClientDotNet.dll</PackagePath>

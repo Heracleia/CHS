@@ -167,16 +167,10 @@ html, body {
 }
 
 .glyphicon {
-	position: relative;
-	top: 50px;
-	margin: auto;
 	color: black;
+	opacity: 0.25;
 }
 
 .glyphicon:hover {
 	color: gray;
-}
-
-.glyphicon-remove, .glyphicon-play {
-	opacity: 0.25;
 }

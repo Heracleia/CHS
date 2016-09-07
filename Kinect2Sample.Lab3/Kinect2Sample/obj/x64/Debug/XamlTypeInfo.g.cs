@@ -564,3 +564,4 @@ namespace Kinect2Sample.Kinect2Sample_XamlTypeInfo
 }
 
 
+

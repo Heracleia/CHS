@@ -21,6 +21,7 @@ app.use('/img', express.static('img'));
 app.use('/js', express.static('js'));
 app.use('/fonts', express.static('fonts'));
 app.use('/sounds', express.static('sounds'));
+app.use('/js', express.static('node_modules/bootstrap-slider/src/js'));
 
 nssite.on('connection', function(socket) {
 	console.log('Site user connected');
@@ -76,14 +77,14 @@ nssite.on('connection', function(socket) {
 			else {
 				csv.parse(data, function(err, output) {
 					if(err)
-						console.log(err);
+						callback(err);
 					else {
 						output.forEach(function(entry) {
 							lookup[entry[0]] = [entry[1], entry[2]];
 						});
 						fs.readdir(_dir + dir, function(err, files) {
 							if(err)
-								console.log(err);
+								callback(err);
 							else {
 								var i = 0;
 								var buffers = [];
@@ -92,9 +93,9 @@ nssite.on('connection', function(socket) {
 									if(i < files.length) {
 										fs.readFile(_dir + dir + files[i], function(err, buf) {
 											if(err)
-												console.log(err);
+												callback(err);
 											else {
-												socket.emit('image', {buffer: buf.toString('base64'), index: i, max: files.length, name: files[i].name, dataclass: lookup[dir + files[i]][0], confidences: lookup[dir + files[i]][1]});
+												socket.emit('image', {buffer: buf.toString('base64'), index: i, max: files.length, name: files[i].toString(), dataclass: lookup[dir + files[i]][0], confidences: lookup[dir + files[i]][1]});
 												i++;
 												next();
 											}

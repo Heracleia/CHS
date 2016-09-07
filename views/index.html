@@ -9,8 +9,8 @@
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/index.css">
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.2.0/bootstrap-slider.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
-	<script src="js/index.js"></script>
 </head>
 <body>
 	<!-- Status Bar -->
@@ -47,7 +47,7 @@
 				<h4 class="text-muted">Sequence:</h4>
 				<h1 id="seq">----</h1>
 				<hr>
-				<div class="remove" id="human">
+				<div class="remove" id="human" style="margin-bottom: 50px;">
 					<img src="../img/Human.png" class="img-responsive">
 					<div class="bodyPart" id="a1">
 						<h3>Head</h3>
@@ -63,8 +63,8 @@
 					</div>
 				</div>
 				<h1>
-					<span class="glyphicon glyphicon-play" data-toggle="tooltip" title="Begin the sequence"></span>
-					<span class="glyphicon glyphicon-remove" data-toggle="tooltip" title="Cancel the sequence"></span>
+					<span id="record-start" class="glyphicon glyphicon-play" data-toggle="tooltip" title="Begin the sequence"></span>
+					<span id="record-stop" class="glyphicon glyphicon-remove" data-toggle="tooltip" title="Cancel the sequence"></span>
 				</h1>
 			</div>
 			<div class="col-sm-2 right-col">
@@ -84,10 +84,17 @@
 				<div class="progress" style="width: 50%; margin: auto; display: none;">
 					<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">0%</div>
 				</div>
-				<p id="frameName" class="text-muted" style="width: 640px; text-align: right;">Frame Name</p>
-				<p id="correct" style="margin-top: 50px;">Command</p>
-				<p id="dataclass">Detected</p>
-				<p id="confidences">Confidence</p>
+				<p id="frameName" class="text-muted" style="width: 640px; text-align: right;"></p>
+				<h1>
+					<span id="analysis-step-back" class="glyphicon glyphicon-step-backward noevents"></span>
+					<span id="analysis-rewind" class="glyphicon glyphicon-backward noevents"></span>
+					<span id="analysis-play" class="glyphicon glyphicon-play noevents"></span>
+					<span id="analysis-forward" class="glyphicon glyphicon-forward noevents"></span>
+					<span id="analysis-step-forward" class="glyphicon glyphicon-step-forward noevents"></span>
+				</h1>
+				<p id="correct" style="margin-top: 50px;"></p>
+				<p id="dataclass"></p>
+				<p id="confidences"></p>
 			</div>
 			<div class="col-sm-2 right-col">
 				<button type="button" class="btn btn-default" id="recordingBtn">To Recording</button>
@@ -96,4 +103,5 @@
 	</div>
 	<div id="bgfocus"></div>
 </body>
+<script src="js/index.js"></script>
 </html>
