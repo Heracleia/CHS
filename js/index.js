@@ -28,6 +28,8 @@ $(document).ready(function() {
 	playing = loading = recording = timer = seqPos = curStep = i = 0;
 	j = -1;
 	curSet = curSeq = '';	
+	ctx.textAlign = 'center';
+	ctx.font = '16px sans-serif';
 	
 	$.fn.preload = function() {
 		this.each(function() {
@@ -213,7 +215,7 @@ $(document).ready(function() {
 		var prog = 100 * data.index / data.max;
 		$('.progress-bar').css('width', prog + '%').attr('aria-valuenow', prog).text(parseInt(prog) + '%');
 		if(data.index + 1 == data.max) {
-			$('.progress-bar').fadeOut();
+			$('.progress').fadeOut();
 			playing = 1;
 			timer = 0;
 		}
@@ -222,13 +224,16 @@ $(document).ready(function() {
 	$('#analysisBtn').click(function() {
 		toAnalysis();
 		if(loading == 0) {
-			socket.emit('reqVideo');
 			ctx.clearRect(0, 0, 640, 360);
-			ctx.textAlign = 'center';
-			ctx.font = '16px sans-serif';
-			ctx.fillText('Loading...', canvas.width / 2, canvas.height / 2);
-			$('.progress-bar').fadeIn();
-			loading = 1;
+			socket.emit('reqVideo', function(err) {
+				if(err)
+					ctx.fillText('Error: File(s) not found', canvas.width / 2, canvas.height / 2);
+				else {
+					ctx.fillText('Loading...', canvas.width / 2, canvas.height / 2);
+					$('.progress').fadeIn();
+					loading = 1;
+				}
+			});			
 		}		
 	});
 	

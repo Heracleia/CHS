@@ -65,14 +65,14 @@ nssite.on('connection', function(socket) {
 		name = data.toString();
 	});
 	
-	socket.on('reqVideo', function(data) {
+	socket.on('reqVideo', function(callback) {
 		var _dir = 'C:/Users/dylan/Documents/data/';
 		var dir = 'CHS/23.08-step11-Sanika/';
 		var filename = 'eval_pose_prediction_23.08-step11-Sanika2016-09-05-100317.csv';
 		var lookup = {};
 		fs.readFile(_dir + filename, 'utf8', function(err, data) {
 			if(err)
-				console.log(err);
+				callback(err);
 			else {
 				csv.parse(data, function(err, output) {
 					if(err)
@@ -94,7 +94,7 @@ nssite.on('connection', function(socket) {
 											if(err)
 												console.log(err);
 											else {
-												socket.emit('image', {buffer: buf.toString('base64'), index: i, max: files.length, dataclass: lookup[dir + files[i]][0], confidences: lookup[dir + files[i]][1]});
+												socket.emit('image', {buffer: buf.toString('base64'), index: i, max: files.length, name: files[i].name, dataclass: lookup[dir + files[i]][0], confidences: lookup[dir + files[i]][1]});
 												i++;
 												next();
 											}
@@ -107,27 +107,6 @@ nssite.on('connection', function(socket) {
 				});
 			}
 		});		
-		/*var path = 'C:/Users/dylan/AppData/Local/Packages/33ba04fc-07f2-4c70-b056-f6f14aeb9b79_2ysye2qyxxc1e/LocalState/23.08-step01-Dylan/';		
-		fs.readdir(path, function(err, files) {
-			if(err)
-				console.log(err);
-			else {
-				var i = 0;
-				var buffers = [];
-				setInterval(function() {
-					if(i < files.length) {
-						fs.readFile(path + files[i], function(err, buf) {
-							if(err)
-								console.log(err);
-							else {
-								socket.emit('image', {buffer: buf.toString('base64'), index: i, max: files.length});
-							}
-						});
-						i++;
-					}
-				}, 100);				
-			}
-		});*/
 	});
 });
 
