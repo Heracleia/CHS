@@ -10,6 +10,7 @@ var siteConnected = false;
 var fs = require('fs');
 var wstream = null;
 var name = '';
+var csv = require('csv');
 
 app.get('/', function(req, res) {
 	res.sendFile(path + 'index.html');
@@ -65,7 +66,48 @@ nssite.on('connection', function(socket) {
 	});
 	
 	socket.on('reqVideo', function(data) {
-		var path = 'C:/Users/dylan/AppData/Local/Packages/33ba04fc-07f2-4c70-b056-f6f14aeb9b79_2ysye2qyxxc1e/LocalState/23.08-step01-Dylan/';
+		var _dir = 'C:/Users/dylan/Documents/data/';
+		var dir = 'CHS/23.08-step11-Sanika/';
+		var filename = 'eval_pose_prediction_23.08-step11-Sanika2016-09-05-100317.csv';
+		var lookup = {};
+		fs.readFile(_dir + filename, 'utf8', function(err, data) {
+			if(err)
+				console.log(err);
+			else {
+				csv.parse(data, function(err, output) {
+					if(err)
+						console.log(err);
+					else {
+						output.forEach(function(entry) {
+							lookup[entry[0]] = [entry[1], entry[2]];
+						});
+						fs.readdir(_dir + dir, function(err, files) {
+							if(err)
+								console.log(err);
+							else {
+								var i = 0;
+								var buffers = [];
+								next();
+								function next() {
+									if(i < files.length) {
+										fs.readFile(_dir + dir + files[i], function(err, buf) {
+											if(err)
+												console.log(err);
+											else {
+												socket.emit('image', {buffer: buf.toString('base64'), index: i, max: files.length, dataclass: lookup[dir + files[i]][0], confidences: lookup[dir + files[i]][1]});
+												i++;
+												next();
+											}
+										});
+									}
+								}
+							}
+						});
+					}
+				});
+			}
+		});		
+		/*var path = 'C:/Users/dylan/AppData/Local/Packages/33ba04fc-07f2-4c70-b056-f6f14aeb9b79_2ysye2qyxxc1e/LocalState/23.08-step01-Dylan/';		
 		fs.readdir(path, function(err, files) {
 			if(err)
 				console.log(err);
@@ -79,14 +121,13 @@ nssite.on('connection', function(socket) {
 								console.log(err);
 							else {
 								socket.emit('image', {buffer: buf.toString('base64'), index: i, max: files.length});
-								console.log(i);
 							}
 						});
 						i++;
 					}
 				}, 100);				
 			}
-		});
+		});*/
 	});
 });
 

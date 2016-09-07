@@ -13,6 +13,7 @@
     "url": "git://github.com/username/repository.git"
   },
   "dependencies": {
+    "csv": "^1.1.0",
     "express": "^4.14.0",
     "fs": "0.0.1-security",
     "socket.io": "^1.4.8"

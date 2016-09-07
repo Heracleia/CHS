@@ -16,7 +16,7 @@ $(document).ready(function() {
 	var setDict = ['1234', '1324', '4231', '4321'];
 	var seqDict = ['123434', '3423132412', '1324323123', '4313122423'];
 	var partDict = ['Head', 'Shoulders', 'Knees', 'Toes'];
-	var playing, loading, recording, timer, seqPos, curStep, curSet, curSeq;
+	var playing, loading, recording, timer, playTimer, seqPos, curStep, curSet, curSeq, i, j;
 	var maxTime = 3000; //Time (ms) between each command
 	var socket = io('/site');
 	var nameCollected = false;
@@ -25,7 +25,8 @@ $(document).ready(function() {
 	var canvas = document.getElementById('playback');
 	var ctx = canvas.getContext('2d');
 	var buffers = [];
-	playing = loading = recording = timer = seqPos = curStep = 0;
+	playing = loading = recording = timer = seqPos = curStep = i = 0;
+	j = -1;
 	curSet = curSeq = '';	
 	
 	$.fn.preload = function() {
@@ -39,7 +40,7 @@ $(document).ready(function() {
 	}
 	
 	$('.collapse').collapse('show');
-	$('.modal').modal('show');
+	//$('.modal').modal('show');
 	
 	$('#nameForm').submit(function(e) {
 		e.preventDefault();
@@ -184,26 +185,37 @@ $(document).ready(function() {
 		ctx.restore();
 	};
 	
-	var i = 0;
 	setInterval(function() {
 		if(playing && i < buffers.length) {
-			imageObj.src = 'data:image/jpeg;base64,' + buffers[i];
+			imageObj.src = 'data:image/jpeg;base64,' + buffers[i].buffer;
+			if(j > -1)
+				$('#correct').text((seqDict[1][j] - 1).toString());
+			$('#dataclass').text(buffers[i].dataclass.toString());
+			$('#confidences').text(buffers[i].confidences.toString());
 			i++;
+			if(timer < maxTime) {
+				timer += 30;
+			} else {
+				timer %= maxTime;
+				j++;
+			}
 		} else if(playing) {
 			playing = 0;
 			i = 0;
+			j = -1;
 			loading = 0;
-			ctx.clearRect(0, 0, 640, 360);
+			timer = 0;
 		}
 	}, 30);
 	
 	socket.on('image', function(data) {
-		buffers.push(data.buffer);
+		buffers.push({buffer: data.buffer, dataclass: data.dataclass, confidences: data.confidences});
 		var prog = 100 * data.index / data.max;
 		$('.progress-bar').css('width', prog + '%').attr('aria-valuenow', prog).text(parseInt(prog) + '%');
 		if(data.index + 1 == data.max) {
 			$('.progress-bar').fadeOut();
 			playing = 1;
+			timer = 0;
 		}
 	});
 	
@@ -211,9 +223,11 @@ $(document).ready(function() {
 		toAnalysis();
 		if(loading == 0) {
 			socket.emit('reqVideo');
+			ctx.clearRect(0, 0, 640, 360);
 			ctx.textAlign = 'center';
 			ctx.font = '16px sans-serif';
 			ctx.fillText('Loading...', canvas.width / 2, canvas.height / 2);
+			$('.progress-bar').fadeIn();
 			loading = 1;
 		}		
 	});
