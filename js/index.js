@@ -22,14 +22,16 @@ $(document).ready(function() {
 	var nameCollected = false;
 	var kinectConnected = false;
 	var participantName = 'Name';
-	var canvas = document.getElementById('playback');
-	var ctx = canvas.getContext('2d');
+	var playbackCanvas = document.getElementById('playback');
+	var predictionCanvas = document.getElementById('confidences');
+	var pbctx = playbackCanvas.getContext('2d');
+	var pctx = predictionCanvas.getContext('2d');
 	var buffers = [];
 	playing = loading = recording = timer = startTime = seqPos = curStep = i = 0;
 	j = -2;
 	curSet = curSeq = '';	
-	ctx.textAlign = 'center';
-	ctx.font = '16px sans-serif';
+	pbctx.textAlign = 'center';
+	pbctx.font = '16px sans-serif';
 	
 	$.fn.preload = function() {
 		this.each(function() {
@@ -37,7 +39,7 @@ $(document).ready(function() {
 		});
 	}
 	
-	$('h1').mousedown(function(e) {
+	$('body').mousedown(function(e) {
 		e.preventDefault();
 	});
 	
@@ -46,7 +48,44 @@ $(document).ready(function() {
 	}
 	
 	$('.collapse').collapse('show');
-	$('.modal').modal('show');
+	//$('.modal').modal('show');
+	
+	var predictionChart = new Chart(pctx, {
+		type: 'doughnut',
+		data: {
+			labels: ["Head", "Shoulders", "Knees", "Toes"],
+			datasets: [{
+				data: [0.25, 0.25, 0.25, 0.25],
+				backgroundColor: [
+					'rgba(255, 99, 132, 0.2)',
+					'rgba(54, 162, 235, 0.2)',
+					'rgba(255, 206, 86, 0.2)',
+					'rgba(75, 192, 192, 0.2)'
+				],
+				borderColor: [
+					'rgba(255,99,132,1)',
+					'rgba(54, 162, 235, 1)',
+					'rgba(255, 206, 86, 1)',
+					'rgba(75, 192, 192, 1)'
+				]
+			}]
+		},
+		options: {
+			responsive: false
+		}
+	});
+	
+	function drawConfidences() {
+		var confidences = [];
+		var re = /\b0.\d+\b/g;
+		var str = buffers[i].confidences.toString();
+		var arr;
+		while((arr = re.exec(str)) !== null) {
+			confidences.push(parseFloat(arr[0]));
+		}
+		predictionChart.data.datasets[0].data = confidences;
+		predictionChart.update();
+	}
 	
 	$('#nameForm').submit(function(e) {
 		e.preventDefault();
@@ -63,9 +102,9 @@ $(document).ready(function() {
 			$('.list-group-item').removeClass('active');
 			$(this).addClass('active');
 			curStep = $(this).attr('id').charAt(3);
+			var seqText = '';
 			curSet = setDict[curStep];
 			curSeq = seqDict[curStep];
-			var seqText = '';
 			for(i = 0; i < curSeq.length; i++) {
 				seqText += '<span id="seq' + i + '">' + curSeq[i] +'</span>';
 			}
@@ -174,17 +213,15 @@ $(document).ready(function() {
 		$('#recording').fadeOut(function() {
 			$('#analysis').fadeIn(function() {
 				if(loading == 0) {
-					ctx.clearRect(0, 0, 640, 360);
-					ctx.fillText('Loading...', canvas.width / 2, canvas.height / 2);
+					loading = 1;
+					pbctx.clearRect(0, 0, 640, 360);
+					pbctx.fillText('Loading...', playbackCanvas.width / 2, playbackCanvas.height / 2);
 					$('.progress-bar').css('width','0%').attr('aria-valuenow', 0).text('0%');
 					$('.progress').fadeIn();
 					socket.emit('reqVideo', function(err) {
 						if(err) {
-							ctx.clearRect(0, 0, 640, 360);
-							ctx.fillText(err, canvas.width / 2, canvas.height / 2);
-						}
-						else {
-							loading = 1;
+							pbctx.clearRect(0, 0, 640, 360);
+							pbctx.fillText(err, playbackCanvas.width / 2, playbackCanvas.height / 2);
 						}
 					});			
 				}
@@ -201,15 +238,16 @@ $(document).ready(function() {
 	
 	var imageObj = new Image();
 	imageObj.onload = function() {
-		ctx.save();
-		ctx.clearRect(0, 0, 640, 360);
-		ctx.drawImage(this, 0, 0, 1920, 1080, 0, 0, 640, 360);
-		ctx.restore();
+		pbctx.save();
+		pbctx.clearRect(0, 0, 640, 360);
+		pbctx.drawImage(this, 0, 0, 1920, 1080, 0, 0, 640, 360);
+		pbctx.restore();
 	};
 	
 	setInterval(function() {
-		if(playing && i < buffers.length) {
+		if(playing && i < buffers.length - 1) {
 			drawFrame();
+			drawConfidences();
 			i++;
 		} else if(playing) {
 			playing = 0;
@@ -223,11 +261,12 @@ $(document).ready(function() {
 		var frameTime = parseFloat(a[0] * 3600 + a[1] * 60 + a[2]);
 		j = Math.floor((frameTime - startTime) / 3) - 1;
 		imageObj.src = 'data:image/jpeg;base64,' + buffers[i].buffer;
-		if(j > -1)
-			$('#correct').text('Command: ' + partDict[seqDict[1][j] - 1]);
+		if(j > -1) {
+			$('#spoken').text('Spoken: ' + partDict[curSet.charAt(curSeq[j] - 1) - 1]);
+			$('#correct').text('Command: ' + partDict[curSeq[j] - 1]);
+		}
 		$('#frameNumber').text(i.toString());
-		$('#dataclass').text('Prediction: ' + partDict[parseInt(buffers[i].dataclass)]);
-		$('#confidences').text(buffers[i].confidences.toString());
+		$('#prediction').text('Prediction: ' + partDict[parseInt(buffers[i].dataclass)]);
 	}
 	
 	socket.on('image', function(data) {
@@ -289,6 +328,9 @@ $(document).ready(function() {
 	});
 	
 	$('#analysisBtn').click(function() {
+		curStep = 1;
+		curSet = setDict[curStep];
+		curSeq = seqDict[curStep];
 		toAnalysis();		
 	});
 	

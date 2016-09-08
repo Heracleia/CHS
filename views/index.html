@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/index.css">
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.2.0/bootstrap-slider.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.bundle.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
@@ -38,13 +38,13 @@
 	</div>
 	<!--Recording session-->
 	<div class="container" id="recording">
-		<div class="row">
+		<div class="row" style="height: 90%">
 			<!-- Navigation -->
-			<div class="col-sm-2 left-col list-group">
+			<div class="col-sm-2 col-sm-offset-1 left-col list-group">
 				<h4 class="text-muted" style="margin-bottom: 20px">Step:</h4>
 			</div>
 			<!-- View -->
-			<div class="col-sm-8" id="view">
+			<div class="col-sm-6" id="view">
 				<h4 class="text-muted">Sequence:</h4>
 				<h1 id="seq">----</h1>
 				<hr>
@@ -68,24 +68,22 @@
 					<span id="record-stop" class="glyphicon glyphicon-remove" data-toggle="tooltip" title="Cancel the sequence"></span>
 				</h1>
 			</div>
-			<div class="col-sm-2 right-col">
-				<button type="button" class="btn btn-default" id="analysisBtn">To Analysis</button>
-			</div>
+		</div>
+		<div class="row" style="margin-top: 25px;">
+			<button type="button" class="btn btn-default" id="analysisBtn">To Analysis</button>
 		</div>
 	</div>
 	<!--Analysis-->
-	<div class="container" id="analysis" style="display: none">
-		<div class="row">
-			<div class="col-sm-2 left-col">
-				<h4 class="text-muted">Step:</h4>
-			</div>
-			<div class="col-sm-8">
+	<div class="container" id="analysis" style="display: none;">
+		<div class="row" style="height: 90%">
+			<div class="col-sm-7 left-col">
 				<h4 class="text-muted">Playback:</h4>
+				<p class="text-muted" style="width: 640px; text-align: left; margin: 50px auto 0 auto;">23.08-step11-Sanika</p>
 				<canvas id="playback" width="640" height="360"></canvas>
-				<div class="progress" style="width: 50%; margin: auto; display: none;">
+				<div class="progress" style="width: 640px; margin: auto; display: none;">
 					<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">0%</div>
 				</div>
-				<p id="frameNumber" class="text-muted" style="width: 640px; text-align: right; margin: auto;"></p>
+				<p id="frameNumber" class="text-muted" style="width: 640px; text-align: left; margin: auto;"></p>
 				<h1>
 					<span id="analysis-step-back" class="glyphicon glyphicon-step-backward noevents"></span>
 					<span id="analysis-rewind" class="glyphicon glyphicon-backward noevents"></span>
@@ -93,13 +91,17 @@
 					<span id="analysis-forward" class="glyphicon glyphicon-forward noevents"></span>
 					<span id="analysis-step-forward" class="glyphicon glyphicon-step-forward noevents"></span>
 				</h1>
-				<p id="correct" style="margin-top: 50px;"></p>
-				<p id="dataclass"></p>
-				<p id="confidences"></p>
 			</div>
-			<div class="col-sm-2 right-col">
-				<button type="button" class="btn btn-default" id="recordingBtn">To Recording</button>
+			<div class="col-sm-5">
+				<h4 class="text-muted">Analysis:</h4>
+				<p id="spoken" style="margin-top: 50px;">Spoken:</p>
+				<p id="correct">Command:</p>
+				<p id="prediction" style="margin-bottom: 50px;">Prediction:</p>
+				<canvas id="confidences" width="300" height="300" style="pointer-events: none; margin: auto;"></canvas>
 			</div>
+		</div>
+		<div class="row" style="margin-top: 25px;">
+			<button type="button" class="btn btn-default" id="recordingBtn">To Recording</button>
 		</div>
 	</div>
 	<div id="bgfocus"></div>
