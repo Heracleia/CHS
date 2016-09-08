@@ -67,35 +67,36 @@ nssite.on('connection', function(socket) {
 	});
 	
 	socket.on('reqVideo', function(callback) {
-		var _dir = 'C:/Users/dylan/Documents/data/';
-		var dir = 'CHS/23.08-step11-Sanika/';
-		var filename = 'eval_pose_prediction_23.08-step11-Sanika2016-09-05-100317.csv';
+		var dir = 'data/23.08-step11-Sanika/';
 		var lookup = {};
-		fs.readFile(_dir + filename, 'utf8', function(err, data) {
-			if(err)
-				callback(err);
+		fs.readFile(dir + 'analysis.csv', 'utf8', function(err, data) {
+			if(err) {
+				callback(err.toString());
+			}
 			else {
 				csv.parse(data, function(err, output) {
-					if(err)
-						callback(err);
+					if(err) {
+						callback(err.toString());
+					}
 					else {
 						output.forEach(function(entry) {
 							lookup[entry[0]] = [entry[1], entry[2]];
 						});
-						fs.readdir(_dir + dir, function(err, files) {
-							if(err)
-								callback(err);
+						fs.readdir(dir, function(err, files) {
+							if(err) {
+								callback(err.toString());
+							}
 							else {
 								var i = 0;
-								var buffers = [];
 								next();
 								function next() {
 									if(i < files.length) {
-										fs.readFile(_dir + dir + files[i], function(err, buf) {
-											if(err)
-												callback(err);
-											else {
-												socket.emit('image', {buffer: buf.toString('base64'), index: i, max: files.length, name: files[i].toString(), dataclass: lookup[dir + files[i]][0], confidences: lookup[dir + files[i]][1]});
+										fs.readFile(dir + files[i], function(err, buf) {
+											if(err) {
+												callback(err.toString());
+											}
+											else if(files[i] != 'analysis.csv') {
+												socket.emit('image', {buffer: buf.toString('base64'), index: i, max: files.length - 1, name: files[i].toString(), dataclass: lookup[files[i]][0], confidences: lookup[files[i]][1]});
 												i++;
 												next();
 											}

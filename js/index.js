@@ -179,8 +179,10 @@ $(document).ready(function() {
 					$('.progress-bar').css('width','0%').attr('aria-valuenow', 0).text('0%');
 					$('.progress').fadeIn();
 					socket.emit('reqVideo', function(err) {
-						if(err)
-							ctx.fillText('Error: File(s) not found', canvas.width / 2, canvas.height / 2);
+						if(err) {
+							ctx.clearRect(0, 0, 640, 360);
+							ctx.fillText(err, canvas.width / 2, canvas.height / 2);
+						}
 						else {
 							loading = 1;
 						}
@@ -223,7 +225,7 @@ $(document).ready(function() {
 		imageObj.src = 'data:image/jpeg;base64,' + buffers[i].buffer;
 		if(j > -1)
 			$('#correct').text('Command: ' + partDict[seqDict[1][j] - 1]);
-		$('#frameName').text(buffers[i].name);
+		$('#frameNumber').text(i.toString());
 		$('#dataclass').text('Prediction: ' + partDict[parseInt(buffers[i].dataclass)]);
 		$('#confidences').text(buffers[i].confidences.toString());
 	}
