@@ -28,13 +28,13 @@
     <AppXManifest Include="C:\Users\dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\Kinect2Sample\bin\x64\Debug\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2016-09-05T22:15:45.231</Modified>
+      <Modified>2016-09-09T16:29:37.919</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\Kinect2Sample\bin\x64\Debug\Kinect2Sample.exe">
       <PackagePath>Kinect2Sample.exe</PackagePath>
-      <Modified>2016-09-07T20:10:53.106</Modified>
+      <Modified>2016-09-09T16:29:37.679</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\packages\EngineIoClientDotNet.0.9.22\lib\netcore45\EngineIoClientDotNet.dll">
       <PackagePath>EngineIoClientDotNet.dll</PackagePath>
@@ -82,7 +82,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\dylan\Documents\Werk\CHS\Kinect2Sample.Lab3\Kinect2Sample\bin\x64\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2016-09-05T22:15:44.579</Modified>
+      <Modified>2016-09-09T16:29:37.867</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

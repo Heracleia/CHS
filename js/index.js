@@ -39,7 +39,7 @@ $(document).ready(function() {
 		});
 	}
 	
-	$('body').mousedown(function(e) {
+	$('h1').mousedown(function(e) {
 		e.preventDefault();
 	});
 	
@@ -48,7 +48,7 @@ $(document).ready(function() {
 	}
 	
 	$('.collapse').collapse('show');
-	//$('.modal').modal('show');
+	$('.modal').modal('show');
 	
 	var predictionChart = new Chart(pctx, {
 		type: 'doughnut',
@@ -306,12 +306,14 @@ $(document).ready(function() {
 	$('#analysis-step-back').click(function() {
 		i = 0;
 		drawFrame();
+		drawConfidences();
 	});
 	
 	$('#analysis-rewind').click(function() {
 		if(i > 5) {
 			i -= 5;
 			drawFrame();
+			drawConfidences();
 		}
 	});
 	
@@ -319,12 +321,14 @@ $(document).ready(function() {
 		if(i < buffers.length - 5) {
 			i += 5;
 			drawFrame();
+			drawConfidences();
 		}
 	});
 	
 	$('#analysis-step-forward').click(function() {
 		i = buffers.length - 1;
 		drawFrame();
+		drawConfidences();
 	});
 	
 	$('#analysisBtn').click(function() {
@@ -335,6 +339,9 @@ $(document).ready(function() {
 	});
 	
 	$('#recordingBtn').click(function() {
+		curStep = 0;
+		curSet = setDict[curStep];
+		curSeq = seqDict[curStep];
 		toRecording();
 	});
 });

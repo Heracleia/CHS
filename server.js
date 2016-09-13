@@ -40,7 +40,7 @@ nssite.on('connection', function(socket) {
 		nskinect.emit('recordStart', data);
 		var date = new Date();
 		var filename = '';
-		filename += 'tmp/' + date.getDay().toString() + '.' + date.getHours().toString() + '.' + date.getMinutes().toString() + '-step' + data.toString() + '-' + name + '.csv';
+		filename += 'data/' + date.getDay().toString() + '.' + date.getHours().toString() + '.' + date.getMinutes().toString() + '-step' + data.toString() + '-' + name + '.csv';
 		wstream = fs.createWriteStream(filename);
 	});
 	
